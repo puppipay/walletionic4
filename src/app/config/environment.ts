@@ -1,4 +1,4 @@
 
 export const environment = {
-    hosteddomain : 'https://dashrevert.belavaditech.com', 
+    hosteddomain : 'https://grand2.belavaditech.com', 
 };

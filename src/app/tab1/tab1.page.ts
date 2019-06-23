@@ -49,7 +49,7 @@ ngOnInit() {
     "address": "",
     "target": "",
     "network": "",
-    "type": "",
+    "type": "BLUE011",
     };
 
 
@@ -90,21 +90,7 @@ loadwalletwif() {
      });
 
 }
-loadlivenetaddress() {
-     this.storage.get('livereceiveaddress').then(data=> {
-        if(data) {
-        this.revertible.target = data;
-        }
-     });
-}
 
-loadtestnetaddress() {
-     this.storage.get('testreceiveaddress').then(data=> {
-        if(data) {
-        this.revertible.target = data;
-        }
-     });
-}
 
 consumetestnetmessage() {
 
@@ -117,6 +103,8 @@ if(!this.revertible.pin) {
  alert("PIN field empty");
  return;
 }
+
+this.revertible.target = this.walletaddress;
 
 this.revertible.network = 'testnet';
 
@@ -138,37 +126,6 @@ this.revertible.network = 'testnet';
 
 }
 
-consumelivenetmessage() {
-
-if(!this.revertible.message) {
- alert("Message field empty");
- return;
-}
-
-if(!this.revertible.pin) {
- alert("PIN field empty");
- return;
-}
- 
-this.revertible.network = 'livenet';
-
- this.blue011consume.savemessage(this.revertible);
-
- this.blue011consume.consumemessage(this.revertible).then((data: any) => {
-      if(data != null)
-      {
-        this.transacted = data;
-        this.blue011consume.savetransaction(this.transacted);
-      }
-      else {
-        alert("Consume failed");
-      }
-   }, (err)=> {
-     alert (err)
-   });
-
-
-}
  
 gettestnetbalance() {
 
