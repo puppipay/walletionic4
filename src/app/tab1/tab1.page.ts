@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Blue011ConsumeService } from './blue011.consume.service';
+//import * as dashcore from '@dashevo/dashcore-lib'
+
+declare var dashcore;
 
 @Component({
   selector: 'app-tab1',
@@ -23,6 +26,18 @@ constructor(
 
 
 ngOnInit() {
+
+const PrivateKey = dashcore.PrivateKey;
+  const privateKey = new PrivateKey();
+  const address = privateKey.toAddress().toString();
+
+ alert(address);
+/*
+ const PrivateKey = dashcore.PrivateKey;
+ const privateKey = new PrivateKey();
+
+ alert(privateKey);
+*/
 
  this.transacted = {
     "txid": "",
