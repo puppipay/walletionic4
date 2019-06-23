@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Blue011ConsumeService } from './blue011.consume.service';
+import { Blue011IssueService } from '../tab3/blue011.issue.service';
 //import * as dashcore from '@dashevo/dashcore-lib'
 
 declare var dashcore;
@@ -15,10 +16,15 @@ export class Tab1Page implements OnInit{
 
 public revertible : any;
 public transacted : any;
-public addressbalance: any;
+public walletbalance: any;
+public walletaddress: any;
+public walletwif: any;
+public toaddress: string;
+public toamount: number;
 
 constructor(
 	private storage: Storage,
+	private blue011issue: Blue011IssueService,
 	private blue011consume: Blue011ConsumeService
 
   ) {
@@ -27,17 +33,8 @@ constructor(
 
 ngOnInit() {
 
-const PrivateKey = dashcore.PrivateKey;
-  const privateKey = new PrivateKey();
-  const address = privateKey.toAddress().toString();
 
- alert(address);
-/*
- const PrivateKey = dashcore.PrivateKey;
- const privateKey = new PrivateKey();
-
- alert(privateKey);
-*/
+ this.loadwalletwif() ;
 
  this.transacted = {
     "txid": "",
@@ -59,6 +56,40 @@ const PrivateKey = dashcore.PrivateKey;
 
 }
 
+wiftoaddress() {
+
+  this.walletaddress = dashcore.PrivateKey.fromWIF(this.walletwif ).toAddress(dashcore.Networks.testnet).toString();
+
+}
+
+sendpayment() {
+
+ this.blue011issue.getUtxo(this.walletaddress, 'testnet').then((data: any) => {
+ var fees = 15000;
+ var utxo = data;
+ var privatekey = dashcore.PrivateKey.fromWIF(this.walletwif);
+ var changeaddress = this.walletaddress;
+ 
+    var tx = this.blue011issue.createtransaction(utxo, privatekey,changeaddress, this.toaddress, Number(this.toamount),fees ) ;
+
+    this.blue011issue.broadcast(tx.toString('hex')).then(res => {
+    
+    alert(res);
+
+    });
+
+  });
+}
+
+loadwalletwif() {
+     this.storage.get('walletwif').then(data=> {
+        if(data) {
+      this.walletwif = data;
+      this.wiftoaddress() ;
+        }
+     });
+
+}
 loadlivenetaddress() {
      this.storage.get('livereceiveaddress').then(data=> {
         if(data) {
@@ -141,15 +172,15 @@ this.revertible.network = 'livenet';
  
 gettestnetbalance() {
 
-if(!this.revertible.address) {
+if(!this.walletaddress) {
  alert("Address empty");
  return;
 }
 
- this.blue011consume.getBalance(this.revertible.address, "testnet").then((data: any) => {
+ this.blue011consume.getBalance(this.walletaddress, "testnet").then((data: any) => {
       if(data != null)
       {
-        this.addressbalance = data;
+        this.walletbalance = data;
       }
       else {
         alert("Query failed");
@@ -160,25 +191,6 @@ if(!this.revertible.address) {
 }
 
 
-getlivenetbalance() {
-
-if(!this.revertible.address) {
- alert("Address empty");
- return;
-}
-
- this.blue011consume.getBalance(this.revertible.address, "livenet").then((data: any) => {
-      if(data != null)
-      {
-        this.addressbalance = data;
-      }
-      else {
-        alert("Query failed");
-      }
-   }, (err)=> {
-     alert (err)
-   });
-}
 
 
 

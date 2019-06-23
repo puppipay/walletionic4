@@ -17,21 +17,22 @@
 <ion-card  class="datainput">
 <ion-card-header>
 <ion-card-title>
- <ion-button fill="clear" size="small" color="primary" (click)="savetestnetaddress()"> Create testnet wallet wif </ion-button>
+ <ion-button fill="clear" size="small" color="primary" (click)="createwif()"> Create testnet wallet wif </ion-button>
 </ion-card-title>
 </ion-card-header>
 <ion-item>
 <ion-label position="stacked"> Enter testnet wallet wif </ion-label>
-<ion-input placeholder="Dash testnet wif" [(ngModel)]="testreceiveaddress" > </ion-input>
+<ion-textarea rows="2" text-wrap placeholder="Dash testnet wif" [(ngModel)]="walletwif" > </ion-textarea>
+           
 </ion-item>
 <ion-item>
-<ion-label>
+<ion-label text-wrap>
 <h4> Wallet address </h4>
-<p> walletaddress </p>
+<p> {{walletaddress}} </p>
 </ion-label>
 </ion-item>
 <ion-item>
- <ion-button fill="clear" size="small" color="primary" (click)="savetestnetaddress()"> Save </ion-button>
+ <ion-button fill="clear" size="small" color="primary" (click)="savewif()"> Save </ion-button>
  <ion-button fill="clear" size="small" color="primary" (click)="gettestnetbalance()"> Get balance </ion-button>
 </ion-item>
 <ion-item *ngIf="testnetaddressbalance">

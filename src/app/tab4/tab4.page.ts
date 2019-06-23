@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage';
 import { Http, Headers } from '@angular/http';
 import { Blue011ConsumeService } from '../tab1/blue011.consume.service';
 
+declare var dashcore;
 
 @Component({
   selector: 'app-tab4',
@@ -10,84 +11,66 @@ import { Blue011ConsumeService } from '../tab1/blue011.consume.service';
   styleUrls: ['tab4.page.scss']
 })
 export class Tab4Page {
+walletwif : any;
+walletaddress : any;
 testnetaddressbalance : any;
-livenetaddressbalance : any;
-receiveaddress : string;
 url: string;
-livereceiveaddress: string;
-testreceiveaddress: string;
 
 constructor(public http: Http, 
          private blue011consume: Blue011ConsumeService,
 	public storage: Storage) {
 
-    this.loadlivenetaddress() ;
-    this.loadtestnetaddress() ;
+    this.loadwalletwif() ;
 
 }
 
-loadlivenetaddress() {
-     this.storage.get('livereceiveaddress').then(data=> {
+createwif() {
+
+  const PrivateKey = dashcore.PrivateKey;
+  const privateKey = new PrivateKey();
+  this.walletwif = privateKey.toWIF();
+  this.wiftoaddress() ;
+
+}
+
+wiftoaddress() {
+
+  this.walletaddress = dashcore.PrivateKey.fromWIF(this.walletwif ).toAddress(dashcore.Networks.testnet).toString();
+
+}
+
+savewif() {
+
+   this.wiftoaddress() ;
+   this.storage.set('walletwif', this.walletwif);
+
+}
+
+
+loadwalletwif() {
+     this.storage.get('walletwif').then(data=> {
 	if(data) {
-      this.livereceiveaddress = data;
+      this.walletwif = data;
+      this.wiftoaddress() ;
         }
      });
 }
 
-loadtestnetaddress() {
-     this.storage.get('testreceiveaddress').then(data=> {
-	if(data) {
-      this.testreceiveaddress = data;
-        }
-     });
-}
 
 
-savetestnetaddress() {
 
-     this.storage.set('testreceiveaddress', this.testreceiveaddress);
-
-}
-
-
-savelivenetaddress() {
-
-     this.storage.set('livereceiveaddress', this.livereceiveaddress);
-
-}
 
 gettestnetbalance() {
 
-if(!this.testreceiveaddress) {
+if(!this.walletaddress) {
  alert("Testnet address empty");
  return;
 }
 
- this.blue011consume.getBalance(this.testreceiveaddress, "testnet").then((data: any) => {
+ this.blue011consume.getBalance(this.walletaddress, "testnet").then((data: any) => {
       if(data != null)
       {
         this.testnetaddressbalance = data;
-      }
-      else {
-        alert("Query failed");
-      }
-   }, (err)=> {
-     alert (err)
-   });
-}
-
-
-getlivenetbalance() {
-
-if(!this.livereceiveaddress) {
- alert("Livenet address empty");
- return;
-}
-
- this.blue011consume.getBalance(this.livereceiveaddress, "livenet").then((data: any) => {
-      if(data != null)
-      {
-        this.livenetaddressbalance = data;
       }
       else {
         alert("Query failed");
