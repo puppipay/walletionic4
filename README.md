@@ -1,20 +1,25 @@
-# walletionic4
+## Dash wallet with revertible address
 
-Clone the Ionic app provided
+# Steps to use 
+
+- Clone the Ionic app provided and run
+
+``` bash
 
 npm install
 
-Run Ionic app provided
+```
 
-ionic serve
+- Run Ionic app provided
+``` bash
+ ionic serve
+
+```
 
 
-# Images of steps
+## Load DASH testcoins to wallet address before using
 
-
-## Load some DASH testcoins to wallet address
-
-<img src="https://github.com/puppipay/blue011issue/workingimages/requestdash.png" alt="alt text" width="400">
+<img  src="https://github.com/puppipay/blue011issue/blob/master/workingimages/requestdash.png" alt="alt text" width="400">
 
 The link to get DASH testcoins is 
 
@@ -25,6 +30,8 @@ http://faucet.test.dash.crowdnode.io
 In the settings tab, click on get balance.
 
 <img src="workingimages/setting_getbalance.png" alt="alt text" width="400">
+
+## Images of features
 
 ## Send funds through revertible address  
 
