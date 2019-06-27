@@ -27,19 +27,23 @@ npm install
 
 # Details in tabs
 
-Settings
+Settings tab
+
 - You can create testnet wallet
 - Check balance
-Send funds
+
+Send fundst tab
 - Send funds directly to any address
 - Send funds through revertible address
 - Stores Message/PIn for sent messages
 
-Transactions
+Transactions tab
+
 - Displays sent transactions
 - Displays received funds
 
-Receive funds
+Receive funds tab
+
 - Receive funds directly to wallet address
 - Receive funds through revertible address (entering message and pin)
 - Stores Message/PIn for receved funds
