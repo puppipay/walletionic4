@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Blue011ConsumeService } from '../tab1/blue011.consume.service';
+import { Blue011IssueService } from '../tab3/blue011.issue.service';
 
 
 @Component({
@@ -10,34 +11,53 @@ import { Blue011ConsumeService } from '../tab1/blue011.consume.service';
 })
 export class Tab2Page implements OnInit{
 
-public transactions = [];
+public receivedtransactions = [];
+public senttransactions = [];
+public whichtransaction = "senttransactions";
 
 constructor(
-        private blue011service: Blue011ConsumeService
+        private blue011consumeservice: Blue011ConsumeService,
+        private blue011issueservice: Blue011IssueService
 
   ) {
 }
 
 ngOnInit() {
 
-this.gettransactions();
+this.getreceivetransactions();
+this.getsenttransactions();
 
 }
 
 
-gettransactions() {
 
-   this.blue011service.gettransactions().then((data: any) => {
+getreceivetransactions() {
+
+   this.blue011consumeservice.getreceivetransactions().then((data: any) => {
       if(data != null)
       {
-        this.transactions = data;
+        this.receivedtransactions = data;
       }
       else {
-        alert("No transactions ");
+        alert("No receive transactions ");
     }
     });
 
 }
  
+
+getsenttransactions() {
+
+   this.blue011issueservice.getsenttransactions().then((data: any) => {
+      if(data != null)
+      {
+        this.senttransactions = data;
+      }
+      else {
+        alert("No sent transactions ");
+    }
+    });
+
+}
 
 }

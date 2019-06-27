@@ -114,7 +114,7 @@ this.revertible.network = 'testnet';
       if(data != null)
       {
         this.transacted = data;
-        this.blue011consume.savetransaction(this.transacted);
+        this.blue011consume.savereceivetransaction(this.transacted);
       }
       else {
         alert("Consume failed");

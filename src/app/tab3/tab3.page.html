@@ -1,16 +1,52 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      Create payment message 
+      Send payment
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content *ngIf="issued">
+  <ion-card >
+      <ion-card-content >
+       <ion-item>
+         <ion-label position="stacked"> Amount to send </ion-label>
+         <ion-input  [(ngModel)]="toamount" placeholder="Amount to send "></ion-input>
+       </ion-item>
+      <ion-card-header>
+     Direct Send payment
+      <ion-button fill="clear" size="small" color="primary" (click)="sendpayment()"> Direct send </ion-button>
+      </ion-card-header>
+       <ion-item>
+         <ion-label position="stacked"> Address to send </ion-label>
+         <ion-input  [(ngModel)]="toaddress" placeholder="Address to send "></ion-input>
+       </ion-item>
+    </ion-card-content >
+  </ion-card >
+  <ion-card >
+      <ion-card-content >
+       <ion-item>
+         <ion-label position="stacked"> Amount to send </ion-label>
+         <ion-input  [(ngModel)]="toamount" placeholder="Amount to send "></ion-input>
+       </ion-item>
+
+      <ion-card-header>
+     Revertible Send payment
+      <ion-button fill="clear" size="small" color="primary" (click)="generatetestnet()"> Create Address</ion-button>
+      </ion-card-header>
+
+       <ion-item>
+      <ion-button fill="clear" size="small" color="primary" (click)="depositefund()"> Deposit fund </ion-button>
+       </ion-item>
+      </ion-card-content >
+    </ion-card >
+
+
+
     <ion-card class="datainput">
       <ion-card-header>
       <ion-card-title>
-      <ion-button fill="clear" size="small" color="primary" (click)="generatetestnet()"> Generate payment message </ion-button>
+     Message/PIN for revertible
       </ion-card-title>
       </ion-card-header>
       <ion-card-content >
@@ -26,8 +62,6 @@
          <ion-input  [(ngModel)]="issued.pin" placeholder="Place to display PIN "></ion-input>
            </ion-item>
 
-
-
       <ion-item text-wrap>
          <ion-label position="stacked"> Revertible address below </ion-label>
          <ion-input  [(ngModel)]="issued.address" placeholder="Place to display revertible address"></ion-input>
@@ -36,87 +70,22 @@
          <ion-label position="stacked"> FullRedeem sharable link </ion-label>
          <ion-input  [(ngModel)]="issued.fullredeemurl" placeholder="Place to display revertible address"></ion-input>
       </ion-item >
-      <ion-button *ngIf="issued.network=='testnet'" fill="clear" size="small" color="primary" (click)="gettestnetbalance()"> Check balance</ion-button>
-      <ion-button *ngIf="issued.network=='livenet'" fill="clear" size="small" color="primary" (click)="getlivenetbalance()"> Check balance</ion-button>
 
+      </ion-card-content>
+    </ion-card>
       <ion-item >
-         <ion-label > Network: {{issued.network}} </ion-label>
       </ion-item >
+
+    <ion-card class="datainput">
+      <ion-button fill="clear" size="small" color="primary" (click)="gettestnetbalance()"> Check balance</ion-button>
+
       <ion-item >
      Balance: {{addressbalance.balanceSat}}
       </ion-item >
-      </ion-card-content>
-    </ion-card>
       <ion-item >
-      </ion-item >
-    <ion-card class="datainput">
-      <ion-card-header>
-      <ion-card-title>
-    2. Deposit funds for payment message and verify
-      </ion-card-title>
-      </ion-card-header>
-      <ion-item >
-         <ion-label position="stacked"> Enter amount to deposit </ion-label>
-         <ion-input  [(ngModel)]="depositamount" placeholder="Deposit amount"></ion-input>
-      </ion-item >
-      <ion-item >
-      <ion-button fill="clear" size="small" color="primary" (click)="gettestnetbalance()"> Deposit</ion-button>
-      <ion-button fill="clear" size="small" color="primary" (click)="gettestnetbalance()"> Check balance</ion-button>
-
+     Transaction id: {{txid}}
       </ion-item >
     </ion-card>
 
-    <ion-card class="datainput">
-      <ion-card-header>
-      <ion-card-title>
-     3. Send the Locking Message and PIN to receiver
-      </ion-card-title>
-      </ion-card-header>
-      <ion-item >
-      3a) Share as a link  
-      </ion-item>
-      <ion-item >
-      3b) Share as Lock-message and PIN
-      </ion-item>
-    </ion-card>
-    <ion-card class="datainput">
-      <ion-card-header>
-      <ion-card-title>
-     4. The receiver can withdraw funds from app provided
-      </ion-card-title>
-      </ion-card-header>
-    </ion-card>
-
-
- <ion-card>
-      <ion-card-header>
-      <ion-card-title>
-     Income potential for developers, solution providers
-      </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-  <h4>
-  1)   As a service provider, you can choose percentage of user-transaction as your fees. This will be your income. This can be set upon SIGNUP.
-  </h4>
-  <ion-item-divider>
-  </ion-item-divider>
-  <h4>
-2) To signup send email to puppipay01@gmail.com
-  </h4>
-  <ion-item-divider>
-  </ion-item-divider>
-  <h4>
-3) PuppiPay is a product of Belavadi Technology Solutions. All Rights Reserved.
-  </h4>
-
-  <ion-item-divider>
-  </ion-item-divider>
-
-  <h4>
-4) Subject to various limitations, terms and conditions.
-  </h4>
-
-      </ion-card-content>
-    </ion-card>
 
 </ion-content>

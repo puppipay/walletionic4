@@ -17,12 +17,13 @@ export class Blue011ConsumeService {
   url: string ;
 
   messages= [];
-  transactions= [];
+//  transactions= [];
+  receivetransactions= [];
 
   constructor(public http: Http, public storage: Storage) {
      this.url = environment.hosteddomain ;
      this.loadmessages() ;
-     this.loadtransactions() ;
+     this.loadreceivetransactions() ;
   }
 
 
@@ -33,18 +34,18 @@ export class Blue011ConsumeService {
     }
   }
 
-  savetransaction (details: any) {
+  savereceivetransaction (details: any) {
     if(details != null) {
-      this.transactions.push(details);
-      this.storage.set('transactions',this.transactions);
+      this.receivetransactions.push(details);
+      this.storage.set('receivetransactions',this.receivetransactions);
     }
   }
 
 
-  loadtransactions() {
-      this.storage.get('transactions').then((data)=> {
+  loadreceivetransactions() {
+      this.storage.get('receivetransactions').then((data)=> {
 	if(data) {
-        this.transactions = data;
+        this.receivetransactions = data;
         }
       });
   }
@@ -58,8 +59,8 @@ export class Blue011ConsumeService {
 
   }
 
-  gettransactions() {
-    return this.storage.get('transactions');
+  getreceivetransactions() {
+    return this.storage.get('receivetransactions');
   }
 
 
