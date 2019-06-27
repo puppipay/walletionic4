@@ -124,6 +124,7 @@ this.revertible.network = 'testnet';
       {
         this.transacted = data;
         this.blue011consume.savereceivetransaction(this.transacted);
+        this.loadreceivedmessages() ;
       }
       else {
         alert("Consume failed");
@@ -166,7 +167,7 @@ loadreceivedmessages() {
         this.receivedmessages = data;
       }
       else {
-        alert("Load failed");
+//        alert("Load failed");
       }
    }, (err)=> {
      alert (err)

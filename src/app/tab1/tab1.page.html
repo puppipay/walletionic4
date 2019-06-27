@@ -30,7 +30,8 @@
 
        <ion-item>
          <ion-label > <h4> Wallet balance  </h4>
-         <p *ngIf="walletbalance"> {{walletbalance.balanceSat}} </p> </ion-label>
+         <h4 *ngIf="walletbalance"> Confirmed: {{walletbalance.balanceSat}} </h4> 
+         <p *ngIf="walletbalance"> Unconfirmed : {{walletbalance.unconfirmedBalance}} </p> </ion-label>
        </ion-item>
  <ion-button fill="clear" size="small" color="primary" (click)="gettestnetbalance()"> Check balance </ion-button>
 
@@ -132,8 +133,7 @@
           <ion-label  text-wrap>
             <h3> Message:          {{msg.message}}
   </h3>
-            <h4> Address:          {{msg.address}}
-  </h4>
+            <h4> To address:          {{msg.target}} </h4>
             <p>
           PIN: {{msg.pin }}
             </p>
