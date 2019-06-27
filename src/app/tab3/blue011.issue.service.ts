@@ -16,37 +16,37 @@ export class Blue011IssueService {
   public token: any;
   url: string ;
 
-  messages= [];
+  sendingmessages= [];
   sendtransactions= [];
 
   constructor(public http: Http, public storage: Storage) {
       this.url = environment.hosteddomain ;
 
-     this.loadmessages() ;
+     this.loadsendingmessages() ;
      this.loadsendtransactions() ;
 
   }
 
 
-  savemessage (details: any) {
+  savesendingmessage (details: any) {
     if(details != null) {
-      this.messages.push(details);
-      this.storage.set('issuemessages',this.messages);
+      this.sendingmessages.push(details);
+      this.storage.set('issuesendingmessages',this.sendingmessages);
     }
   }
 
 
-  loadmessages() {
-      this.storage.get('issuemessages').then((data)=> {
+  loadsendingmessages() {
+      this.storage.get('issuesendingmessages').then((data)=> {
 	if(data) {
-        this.messages = data;
+        this.sendingmessages = data;
         }
       });
 
   }
   
-  getmessages() {
-    return this.storage.get('issuemessages');
+  getsendingmessages() {
+    return this.storage.get('issuesendingmessages');
   }
 
   savesendtransaction (details: any) {
@@ -71,7 +71,7 @@ export class Blue011IssueService {
 
 
 
-  issuemessage (details: any) {
+  issuesendingmessage (details: any) {
 
 
 

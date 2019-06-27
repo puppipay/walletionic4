@@ -41,11 +41,11 @@ generatetestnet() {
       network: "testnet"
     };
 
-   this.blue011issue.issuemessage(data).then((data: any) => {
+   this.blue011issue.issuesendingmessage(data).then((data: any) => {
       if(data != null)
       {
         this.issued = data;
-        this.blue011issue.savemessage(this.issued);
+        this.blue011issue.savesendingmessage(this.issued);
       }
       else {
         alert("Issue failed");
@@ -63,11 +63,11 @@ generatelivenet() {
       network: "livenet"
     };
 
-   this.blue011issue.issuemessage(data).then((data: any) => {
+   this.blue011issue.issuesendingmessage(data).then((data: any) => {
       if(data != null)
       {
         this.issued = data;
-        this.blue011issue.savemessage(this.issued);
+        this.blue011issue.savesendingmessage(this.issued);
       }
       else {
         alert("Issue failed");

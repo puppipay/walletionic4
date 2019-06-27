@@ -16,21 +16,21 @@ export class Blue011ConsumeService {
   public token: any;
   url: string ;
 
-  messages= [];
+  receivedmessages= [];
 //  transactions= [];
   receivetransactions= [];
 
   constructor(public http: Http, public storage: Storage) {
      this.url = environment.hosteddomain ;
-     this.loadmessages() ;
+     this.loadreceivedmessages() ;
      this.loadreceivetransactions() ;
   }
 
 
-  savemessage (details: any) {
+  savereceivedmessage (details: any) {
     if(details != null) {
-      this.messages.push(details);
-      this.storage.set('messages',this.messages);
+      this.receivedmessages.push(details);
+      this.storage.set('receivedmessages',this.receivedmessages);
     }
   }
 
@@ -50,10 +50,10 @@ export class Blue011ConsumeService {
       });
   }
 
-  loadmessages() {
-      this.storage.get('messages').then((data)=> {
+  loadreceivedmessages() {
+      this.storage.get('receivedmessages').then((data)=> {
 	if(data) {
-        this.messages = data;
+        this.receivedmessages = data;
         }
       });
 
@@ -65,8 +65,8 @@ export class Blue011ConsumeService {
 
 
   
-  getmessages() {
-    return this.storage.get('messages');
+  getreceivedmessages() {
+    return this.storage.get('receivedmessages');
   }
 
 

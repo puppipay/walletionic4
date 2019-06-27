@@ -108,7 +108,7 @@ this.revertible.target = this.walletaddress;
 
 this.revertible.network = 'testnet';
 
- this.blue011consume.savemessage(this.revertible);
+ this.blue011consume.savereceivedmessage(this.revertible);
 
  this.blue011consume.consumemessage(this.revertible).then((data: any) => {
       if(data != null)
