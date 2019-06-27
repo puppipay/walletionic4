@@ -1,4 +1,4 @@
-## Dash wallet with revertible address
+## Ionic 4 Dash wallet with revertible address
 
 # Steps to use 
 
@@ -14,7 +14,35 @@ npm install
 ``` bash
  ionic serve
 
+
 ```
+## The DASH app has following tabs and features
+
+4 Tabs
+
+- Recieve funds 
+- Transactions
+- Send funds
+- Settings
+
+# Details in tabs
+
+Settings
+- You can create testnet wallet
+- Check balance
+Send funds
+- Send funds directly to any address
+- Send funds through revertible address
+- Stores Message/PIn for sent messages
+
+Transactions
+- Displays sent transactions
+- Displays received funds
+
+Receive funds
+- Receive funds directly to wallet address
+- Receive funds through revertible address (entering message and pin)
+- Stores Message/PIn for receved funds
 
 
 ## Load DASH testcoins to wallet address before using
@@ -25,13 +53,18 @@ The link to get DASH testcoins is
 
 http://faucet.test.dash.crowdnode.io
 
+
+## Images of features
+
+
+
 ## Confirm the DASH testcoins are received
 
 In the settings tab, click on get balance.
 
 <img src="workingimages/setting_getbalance.png" alt="alt text" width="400">
 
-## Images of features
+
 
 ## Send funds through revertible address  
 
