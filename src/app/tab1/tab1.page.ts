@@ -59,6 +59,12 @@ ngOnInit() {
 
 }
 
+ionViewWillEnter() {
+  this.loadreceivedmessages() ;
+}
+
+
+
 wiftoaddress() {
 
   this.walletaddress = dashcore.PrivateKey.fromWIF(this.walletwif ).toAddress(dashcore.Networks.testnet).toString();
