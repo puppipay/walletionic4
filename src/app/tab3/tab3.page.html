@@ -1,12 +1,25 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>
-      Send payment
-    </ion-title>
+   <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+
+
+  <ion-segment  [(ngModel)]="whichsegment">
+    <ion-segment-button value="send">
+      <ion-label > Send funds </ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="messages">
+      <ion-label > Messages </ion-label>
+    </ion-segment-button>
+  </ion-segment>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content *ngIf="issued">
+<div *ngIf="whichsegment == 'send'">
+
   <ion-card >
       <ion-card-header>
      Direct Send payment
@@ -87,5 +100,28 @@
       </ion-item >
     </ion-card>
 
+</div>
+<div *ngIf="whichsegment == 'messages'">
 
+  <ion-item *ngIf="sendingmessages.length == 0" >
+  No messages
+    </ion-item  >
+         
+ <ion-list> 
+
+    <ion-item *ngFor="let msg of sendingmessages" >
+          <ion-label  text-wrap>
+            <h3> Message:          {{msg.message}}
+  </h3>
+            <h4> Address:          {{msg.address}}
+  </h4>
+            <p>
+          PIN: {{msg.pin }}
+            </p>
+       </ion-label>
+    </ion-item>
+
+ </ion-list> 
+
+</div>
 </ion-content>

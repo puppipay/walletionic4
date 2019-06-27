@@ -21,6 +21,9 @@ public walletaddress: any;
 public walletwif: any;
 public toaddress: string;
 public toamount: number;
+public receivedmessages = [];
+
+public whichsegment = "receive";
 
 constructor(
 	private storage: Storage,
@@ -146,6 +149,26 @@ if(!this.walletaddress) {
      alert (err)
    });
 }
+
+
+loadreceivedmessages() {
+
+
+   this.blue011consume.getreceivedmessages().then((data: any) => {
+      if(data != null)
+      {
+        this.receivedmessages = data;
+      }
+      else {
+        alert("Load failed");
+      }
+   }, (err)=> {
+     alert (err)
+   });
+
+}
+
+
 
 
 

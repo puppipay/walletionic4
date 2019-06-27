@@ -1,12 +1,21 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>
-      DASH wallet
-    </ion-title>
+  <ion-segment  [(ngModel)]="whichsegment">
+    <ion-segment-button value="receive">
+      <ion-label > Receive funds </ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="messages">
+      <ion-label > Messages </ion-label>
+    </ion-segment-button>
+  </ion-segment>
   </ion-toolbar>
 </ion-header>
 
+
+
+
 <ion-content>
+<div *ngIf="whichsegment == 'receive'">
     <ion-card >
       <ion-card-header>
       <ion-card-title>
@@ -110,5 +119,28 @@
       </ion-card-content>
     </ion-card>
 
+</div>
+
+<div *ngIf="whichsegment == 'messages'">
+  <ion-item *ngIf="receivedmessages.length == 0" >
+  No messages
+    </ion-item  >
+
+ <ion-list>
+
+    <ion-item *ngFor="let msg of receivedmessages" >
+          <ion-label  text-wrap>
+            <h3> Message:          {{msg.message}}
+  </h3>
+            <h4> Address:          {{msg.address}}
+  </h4>
+            <p>
+          PIN: {{msg.pin }}
+            </p>
+       </ion-label>
+    </ion-item>
+
+ </ion-list>
+</div>
 
 </ion-content>

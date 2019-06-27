@@ -10,7 +10,9 @@ import { Blue011IssueService } from './blue011.issue.service';
 export class Tab3Page implements OnInit{
 
 public issued: any;
+public whichsegment = "send";
 public addressbalance : any;
+public sendingmessages = [];
 
 constructor(
 	private blue011issue: Blue011IssueService
@@ -56,30 +58,6 @@ generatetestnet() {
 
 }
 
-generatelivenet() {
-
-    var data = {
-      msgtype: "default",
-      network: "livenet"
-    };
-
-   this.blue011issue.issuesendingmessage(data).then((data: any) => {
-      if(data != null)
-      {
-        this.issued = data;
-        this.blue011issue.savesendingmessage(this.issued);
-      }
-      else {
-        alert("Issue failed");
-      }
-
-   }, (err)=> {
-     alert (err)
-   });
-
-
-
-}
 
 gettestnetbalance() {
 
@@ -101,27 +79,24 @@ if(!this.issued.address) {
    });
 }
 
-getlivenetbalance() {
 
-if(!this.issued.address) {
- alert("Livenet address empty");
- return;
-}
 
- this.blue011issue.getBalance(this.issued.address, "livenet").then((data: any) => {
+loadsendingmessages() {
+
+
+   this.blue011issue.getsendingmessages().then((data: any) => {
       if(data != null)
       {
-        this.addressbalance = data;
+        this.sendingmessages = data;
       }
       else {
-        alert("Query failed");
+        alert("Load failed");
       }
    }, (err)=> {
      alert (err)
    });
+
 }
-
-
 
  
 
