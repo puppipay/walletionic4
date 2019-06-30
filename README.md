@@ -1,4 +1,4 @@
-## Ionic 4 Dash wallet with revertible address
+## Ionic 4 Dash wallet with revertible payment address
 
 # Steps to use 
 
